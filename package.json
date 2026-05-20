@@ -1,0 +1,35 @@
+{
+  "name": "retailqa-capstone",
+  "version": "1.0.0",
+  "description": "BRD-aligned Retail QE Capstone automation project using Cypress TypeScript, Postman/Newman, SQL validation, and GitHub Actions.",
+  "main": "index.js",
+  "scripts": {
+    "cy:open": "cypress open",
+    "cy:verify": "cypress verify",
+    "cy:run": "cypress run",
+    "typecheck": "tsc --noEmit",
+    "api:test": "newman run postman/collections/retail-api-tests.postman_collection.json -e postman/environments/local.postman_environment.json --env-var apiBaseUrl=$env:API_BASE_URL --reporters cli,htmlextra --reporter-htmlextra-export reports/postman/newman-report.html",
+    "test:ui": "npm run typecheck && npm run cy:run",
+    "test:api": "npm run api:test",
+    "test:all": "npm run typecheck && npm run api:test && npm run cy:run"
+  },
+  "keywords": [
+    "qa",
+    "cypress",
+    "typescript",
+    "postman",
+    "newman",
+    "sql",
+    "github-actions",
+    "ci-cd"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^15.0.0",
+    "newman": "^6.0.0",
+    "newman-reporter-htmlextra": "^1.23.1",
+    "typescript": "^5.0.0",
+    "wait-on": "^8.0.0"
+  }
+}

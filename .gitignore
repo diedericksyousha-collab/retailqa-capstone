@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+
+# Cypress output
+cypress/screenshots/
+cypress/videos/
+cypress/downloads/
+
+# Reports
+reports/cypress/*
+reports/postman/*
+reports/sql/*
+reports/screenshots/*
+
+# Keep report folders
+!reports/cypress/.gitkeep
+!reports/postman/.gitkeep
+!reports/sql/.gitkeep
+!reports/screenshots/.gitkeep
+
+# Environment files
+.env
+.env.local
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*

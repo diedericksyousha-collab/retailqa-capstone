@@ -1,0 +1,40 @@
+{
+  "standardOrder": {
+    "customerType": "Regular",
+    "items": [
+      {
+        "productId": 1,
+        "quantity": 1,
+        "price": 100
+      }
+    ],
+    "expectedTotal": 100
+  },
+  "premiumCustomerOrder": {
+    "customerType": "Premium",
+    "items": [
+      {
+        "productId": 2,
+        "quantity": 2,
+        "price": 250
+      }
+    ],
+    "expectedTotal": 500
+  },
+  "multiItemOrder": {
+    "customerType": "Regular",
+    "items": [
+      {
+        "productId": 1,
+        "quantity": 1,
+        "price": 100
+      },
+      {
+        "productId": 2,
+        "quantity": 1,
+        "price": 250
+      }
+    ],
+    "expectedTotal": 350
+  }
+}
