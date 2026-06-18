@@ -44,11 +44,11 @@ jobs:
       # These are commented out because the app, API, and database are local to your Windows machine.
       # GitHub-hosted runners cannot access your local localhost services.
 
-      # - name: Run API tests
-      #   run: npm run api:test
+      - name: Run API tests
+        run: npm run api:test
 
-      # - name: Run Cypress UI tests
-      #   run: npm run cy:run
+      - name: Run Cypress UI tests
+        run: npm run cy:run
 
       - name: Upload reports
         if: always()
