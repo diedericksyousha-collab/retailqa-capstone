@@ -42,7 +42,8 @@ jobs:
           echo "Project structure exists."
 
       - name: Run API tests
-        run: npm run api:test
+        run: npm run api:test:collection1
+             npm run api:test:collection2
 
       - name: Run Cypress UI tests
         run: npm run cy:run
