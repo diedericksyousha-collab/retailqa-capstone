@@ -10,9 +10,19 @@ jobs:
   qa-checks:
     runs-on: ubuntu-latest
 
+    services:
+      sqlserver:
+        image: mcr.microsoft.com/mssql/server:2022-latest
+        env:
+          ACCEPT_EULA: Y
+          SA_PASSWORD: "Your_password123"
+        ports:
+          - 1433:1433
+
     env:
       CYPRESS_BASE_URL: http://localhost:3000
       API_BASE_URL: http://localhost:5000
+      ConnectionStrings__DefaultConnection: "Server=localhost,1433;Database=LewisStoresDb;User Id=sa;Password=Your_password123;"
 
     steps:
       - name: Checkout repository
@@ -26,10 +36,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run BackEnd
+      - name: Run Backend + Tests
         run: npm run ci:test
-        env:
-          API_BASE_URL: http://localhost:5000
 
       - name: Verify Cypress installation
         run: npm run cy:verify
@@ -47,8 +55,9 @@ jobs:
           echo "Project structure exists."
 
       - name: Run API tests
-        run: npm run api:test:collection1
-             npm run api:test:collection2
+        run: |
+          npm run api:test:collection1
+          npm run api:test:collection2
 
       - name: Run Cypress UI tests
         run: npm run cy:run
