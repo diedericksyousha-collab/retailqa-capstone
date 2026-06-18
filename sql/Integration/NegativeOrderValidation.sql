@@ -1,0 +1,3 @@
+SELECT *
+FROM Orders
+WHERE Id = 'LWS-68625'

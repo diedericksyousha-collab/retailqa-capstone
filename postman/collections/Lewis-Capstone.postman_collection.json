@@ -1,0 +1,1388 @@
+{
+  "info": {
+    "_postman_id": "15df0179-c102-4507-a949-37a8a38c755c",
+    "name": "Lewis-Capstone",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53068238",
+    "_collection_link": "https://go.postman.co/collection/53068238-15df0179-c102-4507-a949-37a8a38c755c?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Valid Users Exist",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200 OK', function(){\r",
+              "    pm.response.to.have.status(200);\r",
+              "})\r",
+              "\r",
+              "pm.test('Response time is under 2 seconds', function() {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+              "})"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"michael.chen@lewisstores.local\",\r\n    \"password\": \"Password123!\"\r\n  }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/Auth/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "Auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "User with valid details succeeds",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "    });\r",
+              "\r",
+              "pm.test(\"Response time is less than 2 seconds\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+              "    });\r",
+              "\r",
+              "pm.test(\"User ID is present\", function () {\r",
+              "    pm.expect(pm.response.json().id).to.not.be.null;\r",
+              "    });\r",
+              "\r",
+              "pm.test(\"User email is present\", function () {\r",
+              "    pm.expect(pm.response.json().email).to.not.be.null;\r",
+              "    });\r",
+              "\r",
+              "pm.test(\"User role is present\", function () {\r",
+              "    pm.expect(pm.response.json().role).to.not.be.null;\r",
+              "    });\r",
+              "\r",
+              "pm.test(\"User full name is present\", function () {\r",
+              "    pm.expect(pm.response.json().fullName).to.not.be.null;\r",
+              "    });\r",
+              "\r",
+              "pm.test(\"User phone is present\", function () {\r",
+              "    pm.expect(pm.response.json().phone).to.not.be.null;\r",
+              "    });\r",
+              "\r",
+              "pm.test(\"User address is present\", function () {\r",
+              "    pm.expect(pm.response.json().address).to.not.be.null;\r",
+              "    });\r",
+              "\r",
+              "pm.test(\"User phone has correct number of digits\", function() {\r",
+              "    pm.expect(pm.response.json().phone).to.have.lengthOf(8);\r",
+              "})\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJ1c2VyLTAwMSIsImVtYWlsIjoidGVzdC5jdXN0b21lckBsZXdpc3N0b3Jlcy5sb2NhbCIsInJvbGUiOiJDdXN0b21lciIsIm5iZiI6MTc3OTEwODU2NywiZXhwIjoxNzc5NzEzMzY3LCJpYXQiOjE3NzkxMDg1NjcsImlzcyI6Ikxld2lzU3RvcmVzTW9ja0lzc3VlciIsImF1ZCI6Ikxld2lzU3RvcmVzTW9ja0F1ZGllbmNlIn0.3UYx7DO7kHyCUAW78C3J35q4DHAtirETSdVSfTvhIn8",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/Auth/me",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "Auth",
+            "me"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "User with invalid details cannot sign up/register.",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200 OK', function(){\r",
+              "    pm.response.to.have.status(200);\r",
+              "})\r",
+              "\r",
+              "pm.test('Response time is under 2 seconds', function() {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+              "})"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"test.customer@lewisstores.local\",\r\n    \"password\": \"Password789!\"\r\n  }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/Auth/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "Auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "User does not receive details when logging in with incorrect token.",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "    });\r",
+              "\r",
+              "pm.test(\"Response time is less than 2 seconds\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+              "    });"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJ1c2VyLTAwMSIsImVtYWlsIjoidGVzdC5jdXN0b21lckBsZXdpc3N0b3Jlcy5sb2NhbCIsInJvbGUiOiJDdXN0b21lciIsIm5iZiI6MTc3OTE4MjkzMywiZXhwIjoxNzc5Nzg3NzMzLCJpYXQiOjE3NzkxODI5MzMsImlzcyI6Ikxld2lzU3RvcmVzTW9ja0lzc3VlciIsImF1ZCI6Ikxld2lzU3RvcmVzTW9ja0F1ZGllbmNlIn0.caBApzvXBDCnD5-ZDnoWXdSUs4SswnNGtDE-nc40pn",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/Auth/me",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "Auth",
+            "me"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Stock",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJ1c2VyLTAwMyIsImVtYWlsIjoibWljaGFlbC5jaGVuQGxld2lzc3RvcmVzLmxvY2FsIiwicm9sZSI6IkN1c3RvbWVyIiwibmJmIjoxNzgwMjk3ODIwLCJleHAiOjE3ODA5MDI2MjAsImlhdCI6MTc4MDI5NzgyMCwiaXNzIjoiTGV3aXNTdG9yZXNNb2NrSXNzdWVyIiwiYXVkIjoiTGV3aXNTdG9yZXNNb2NrQXVkaWVuY2UifQ.l4qCGBaZBqI04_xUZcee5tVmHmVs1b8N2UHXZxGqdz4",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/Products",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "Products"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Valid user can successfully create an order.",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Returns status code 201 Created', function () {\r",
+              "    pm.response.to.have.status(201);\r",
+              "});\r",
+              "\r",
+              "pm.test('Response time to be less than 2 seconds', function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(2000)\r",
+              "})\r",
+              " \r",
+              "pm.test('Response body has all required properties', function () {\r",
+              "    const res = pm.response.json();\r",
+              "\r",
+              "    pm.expect(res).to.have.property('id');\r",
+              "    pm.expect(res).to.have.property('date');\r",
+              "    pm.expect(res).to.have.property('status');\r",
+              "    pm.expect(res).to.have.property('total');\r",
+              "    pm.expect(res).to.have.property('userId');\r",
+              "    pm.expect(res).to.have.property('items');\r",
+              "\r",
+              "    pm.expect(res.id).to.be.a('string');\r",
+              "    pm.expect(res.date).to.be.a('string');\r",
+              "    pm.expect(res.status).to.be.a('string');\r",
+              "    pm.expect(res.total).to.be.a('number');\r",
+              "    pm.expect(res.userId).to.be.a('string');\r",
+              "    pm.expect(res.items).to.be.an('array');\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJ1c2VyLTAwMSIsImVtYWlsIjoidGVzdC5jdXN0b21lckBsZXdpc3N0b3Jlcy5sb2NhbCIsInJvbGUiOiJDdXN0b21lciIsIm5iZiI6MTc3OTE4NDAyMiwiZXhwIjoxNzc5Nzg4ODIyLCJpYXQiOjE3NzkxODQwMjIsImlzcyI6Ikxld2lzU3RvcmVzTW9ja0lzc3VlciIsImF1ZCI6Ikxld2lzU3RvcmVzTW9ja0F1ZGllbmNlIn0.uzRj7JwkpIRgDcovRRl4VP7_qYL5Nli7i5mt3p5MlGU",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"total\": 1,\r\n  \"items\": \"air-fryer\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/Orders",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "Orders"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "All orders",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200 OK', function () {\r",
+              "    pm.response.to.have.status(200)\r",
+              "})\r",
+              "\r",
+              "pm.test('Response time is below 2 seconds', function() {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(2000)\r",
+              "})\r",
+              "\r",
+              "pm.test('Response body is not empty', function() {\r",
+              "    pm.expect(pm.response.json()).to.not.be.empty\r",
+              "    })\r",
+              "\r",
+              "pm.test('Response body contains an array of orders', function() {\r",
+              "    pm.expect(pm.response.json()).to.be.an('array')\r",
+              "})"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJ1c2VyLTAwMyIsImVtYWlsIjoibWljaGFlbC5jaGVuQGxld2lzc3RvcmVzLmxvY2FsIiwicm9sZSI6IkN1c3RvbWVyIiwibmJmIjoxNzgwMjk3ODIwLCJleHAiOjE3ODA5MDI2MjAsImlhdCI6MTc4MDI5NzgyMCwiaXNzIjoiTGV3aXNTdG9yZXNNb2NrSXNzdWVyIiwiYXVkIjoiTGV3aXNTdG9yZXNNb2NrQXVkaWVuY2UifQ.l4qCGBaZBqI04_xUZcee5tVmHmVs1b8N2UHXZxGqdz4",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"total\": 1,\r\n  \"items\": \"string\"\r\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/Orders",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "Orders"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "User can get product",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "    });\r",
+              "\r",
+              "pm.test(\"Response time is less than 2 seconds\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+              "    });\r",
+              "\r",
+              "pm.test(\"Product ID is correct\", function () {\r",
+              "    pm.expect(pm.response.json().id).to.eql(\"air-fryer\");\r",
+              "    });\r",
+              "\r",
+              "pm.test('Response body is not empty', function() {\r",
+              "    pm.expect(pm.response.text()).to.not.be.empty;\r",
+              "})\r",
+              "\r",
+              "pm.test('Response contains all necessary product properties with correct data types', function() {\r",
+              "    const response = pm.response.json();\r",
+              "\r",
+              "    pm.expect(response).to.have.property('id').that.is.a('string');\r",
+              "    pm.expect(response).to.have.property('title').that.is.a('string');\r",
+              "    pm.expect(response).to.have.property('description').that.is.a('string');\r",
+              "    pm.expect(response).to.have.property('price').that.is.a('number');\r",
+              "    pm.expect(response).to.have.property('oldPrice');\r",
+              "    pm.expect(response).to.have.property('tag');\r",
+              "    pm.expect(response).to.have.property('rating');\r",
+              "    pm.expect(response).to.have.property('category').that.is.a('string');\r",
+              "    pm.expect(response).to.have.property('image').that.is.a('string');\r",
+              "    pm.expect(response).to.have.property('sku').that.is.a('string');\r",
+              "    pm.expect(response).to.have.property('stockQuantity').that.is.a('number');\r",
+              "    pm.expect(response).to.have.property('isActive').that.is.a('boolean');\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJ1c2VyLTAwMSIsImVtYWlsIjoidGVzdC5jdXN0b21lckBsZXdpc3N0b3Jlcy5sb2NhbCIsInJvbGUiOiJDdXN0b21lciIsIm5iZiI6MTc3OTE4NDAyMiwiZXhwIjoxNzc5Nzg4ODIyLCJpYXQiOjE3NzkxODQwMjIsImlzcyI6Ikxld2lzU3RvcmVzTW9ja0lzc3VlciIsImF1ZCI6Ikxld2lzU3RvcmVzTW9ja0F1ZGllbmNlIn0.uzRj7JwkpIRgDcovRRl4VP7_qYL5Nli7i5mt3p5MlGU",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/Products/air-fryer",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "Products",
+            "air-fryer"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Add product to cart before order creation",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              " "
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJ1c2VyLTAwMSIsImVtYWlsIjoidGVzdC5jdXN0b21lckBsZXdpc3N0b3Jlcy5sb2NhbCIsInJvbGUiOiJDdXN0b21lciIsIm5iZiI6MTc3OTE4NDAyMiwiZXhwIjoxNzc5Nzg4ODIyLCJpYXQiOjE3NzkxODQwMjIsImlzcyI6Ikxld2lzU3RvcmVzTW9ja0lzc3VlciIsImF1ZCI6Ikxld2lzU3RvcmVzTW9ja0F1ZGllbmNlIn0.uzRj7JwkpIRgDcovRRl4VP7_qYL5Nli7i5mt3p5MlGU",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"internalId\": 0,\r\n  \"id\": \"air-fryer\",\r\n  \"title\": \"Smart Air Fryer Oven\",\r\n  \"variant\": \"5\",\r\n  \"quantity\": 2,\r\n  \"price\": 9999.00\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/Cart",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "Cart"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Order with invalid product details not created",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJ1c2VyLTAwMyIsImVtYWlsIjoibWljaGFlbC5jaGVuQGxld2lzc3RvcmVzLmxvY2FsIiwicm9sZSI6IkN1c3RvbWVyIiwibmJmIjoxNzgwMjk3ODIwLCJleHAiOjE3ODA5MDI2MjAsImlhdCI6MTc4MDI5NzgyMCwiaXNzIjoiTGV3aXNTdG9yZXNNb2NrSXNzdWVyIiwiYXVkIjoiTGV3aXNTdG9yZXNNb2NrQXVkaWVuY2UifQ.l4qCGBaZBqI04_xUZcee5tVmHmVs1b8N2UHXZxGqdz4",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"total\": 29999.00,\r\n  \"items\": \"CloudRest Memory Foam Mattress\",\r\n  \"itemsList\": [\r\n    {\r\n      \"productId\": \"cloudrest-mattress\",\r\n      \"quantity\": 1,\r\n      \"unitPrice\": 29999.00\r\n    }\r\n  ]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/Orders",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "Orders"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "User cannot create order with invalid price.",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Order total must be greater than zero\", function () {\r",
+              "    pm.expect(pm.response.json().message).to.eql(\"Order total must be greater than zero.\");\r",
+              "    });\r",
+              "\r",
+              "pm.test(\"Status code is 400\", function () {\r",
+              "    pm.response.to.have.status(400)\r",
+              "})"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJ1c2VyLTAwMSIsImVtYWlsIjoidGVzdC5jdXN0b21lckBsZXdpc3N0b3Jlcy5sb2NhbCIsInJvbGUiOiJDdXN0b21lciIsIm5iZiI6MTc3OTE4NDAyMiwiZXhwIjoxNzc5Nzg4ODIyLCJpYXQiOjE3NzkxODQwMjIsImlzcyI6Ikxld2lzU3RvcmVzTW9ja0lzc3VlciIsImF1ZCI6Ikxld2lzU3RvcmVzTW9ja0F1ZGllbmNlIn0.uzRj7JwkpIRgDcovRRl4VP7_qYL5Nli7i5mt3p5MlGU",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"total\": 0,\r\n  \"items\": \"air-fryer\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/Orders",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "Orders"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Cannot delete nonexistent item from cart",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Error code 404', function() {\r",
+              "    pm.response.to.have.status(404);\r",
+              "})"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJ1c2VyLTAwMSIsImVtYWlsIjoidGVzdC5jdXN0b21lckBsZXdpc3N0b3Jlcy5sb2NhbCIsInJvbGUiOiJDdXN0b21lciIsIm5iZiI6MTc3OTE4NDAyMiwiZXhwIjoxNzc5Nzg4ODIyLCJpYXQiOjE3NzkxODQwMjIsImlzcyI6Ikxld2lzU3RvcmVzTW9ja0lzc3VlciIsImF1ZCI6Ikxld2lzU3RvcmVzTW9ja0F1ZGllbmNlIn0.uzRj7JwkpIRgDcovRRl4VP7_qYL5Nli7i5mt3p5MlGU",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/Cart/9999",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "Cart",
+            "9999"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "No duplicate orders created",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJ1c2VyLTAwMSIsImVtYWlsIjoidGVzdC5jdXN0b21lckBsZXdpc3N0b3Jlcy5sb2NhbCIsInJvbGUiOiJDdXN0b21lciIsIm5iZiI6MTc3OTE4NDAyMiwiZXhwIjoxNzc5Nzg4ODIyLCJpYXQiOjE3NzkxODQwMjIsImlzcyI6Ikxld2lzU3RvcmVzTW9ja0lzc3VlciIsImF1ZCI6Ikxld2lzU3RvcmVzTW9ja0F1ZGllbmNlIn0.uzRj7JwkpIRgDcovRRl4VP7_qYL5Nli7i5mt3p5MlGU",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"total\": 9999.00,\r\n  \"items\": \"air-fryer\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/Orders",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "Orders"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Process Valid Payments",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "    });\r",
+              "\r",
+              "\r",
+              "pm.test(\"Response time is less than 2 seconds\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+              "    });\r",
+              "\r",
+              "pm.test(\"Response body contains all necessary properties\", function () {\r",
+              "    const res = pm.response.json();\r",
+              "\r",
+              "    pm.expect(res).to.be.an('array');\r",
+              "    pm.expect(res.length).to.be.greaterThan(0);\r",
+              "\r",
+              "    res.forEach(paymentMethod => {\r",
+              "\r",
+              "        pm.expect(paymentMethod).to.have.property('id');\r",
+              "        pm.expect(paymentMethod).to.have.property('userId');\r",
+              "        pm.expect(paymentMethod).to.have.property('cardholderName');\r",
+              "        pm.expect(paymentMethod).to.have.property('last4');\r",
+              "        pm.expect(paymentMethod).to.have.property('brand');\r",
+              "        pm.expect(paymentMethod).to.have.property('expiry');\r",
+              "        pm.expect(paymentMethod).to.have.property('isDefault');\r",
+              "\r",
+              "        pm.expect(paymentMethod.id).to.be.a('number');\r",
+              "        pm.expect(paymentMethod.userId).to.be.a('string');\r",
+              "        pm.expect(paymentMethod.cardholderName).to.be.a('string');\r",
+              "        pm.expect(paymentMethod.last4).to.be.a('string');\r",
+              "        pm.expect(paymentMethod.brand).to.be.a('string');\r",
+              "        pm.expect(paymentMethod.expiry).to.be.a('string');\r",
+              "        pm.expect(paymentMethod.isDefault).to.be.a('boolean');\r",
+              "\r",
+              "    });\r",
+              "});\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJ1c2VyLTAwMyIsImVtYWlsIjoibWljaGFlbC5jaGVuQGxld2lzc3RvcmVzLmxvY2FsIiwicm9sZSI6IkN1c3RvbWVyIiwibmJmIjoxNzgwMjk3ODIwLCJleHAiOjE3ODA5MDI2MjAsImlhdCI6MTc4MDI5NzgyMCwiaXNzIjoiTGV3aXNTdG9yZXNNb2NrSXNzdWVyIiwiYXVkIjoiTGV3aXNTdG9yZXNNb2NrQXVkaWVuY2UifQ.l4qCGBaZBqI04_xUZcee5tVmHmVs1b8N2UHXZxGqdz4",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/PaymentMethods",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "PaymentMethods"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "User can create return request",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 201\", function () {\r",
+              "    pm.response.to.have.status(201);\r",
+              "    });\r",
+              "\r",
+              "pm.test(\"Response time is below 2 seconds\", function() {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+              "})\r",
+              "\r",
+              "pm.test(\"Respons ebody contains correct properties\", function() {\r",
+              "    const res = pm.response.json();\r",
+              "    pm.expect(res).to.have.property('id');\r",
+              "    pm.expect(res).to.have.property('orderId');\r",
+              "    pm.expect(res).to.have.property('userId');\r",
+              "    pm.expect(res).to.have.property('reason');\r",
+              "    pm.expect(res).to.have.property('status');\r",
+              "    pm.expect(res).to.have.property('requestedAmount');\r",
+              "    pm.expect(res).to.have.property('approvedAmount');\r",
+              "    pm.expect(res).to.have.property('resolutionNotes');\r",
+              "    pm.expect(res).to.have.property('requestedAtUtc');\r",
+              "    pm.expect(res).to.have.property('updatedAtUtc');\r",
+              "\r",
+              "      pm.expect(res.id).to.be.a('number');\r",
+              "      pm.expect(res.orderId).to.be.a('string');\r",
+              "      pm.expect(res.userId).to.be.a('string');\r",
+              "      pm.expect(res.reason).to.be.a('string');\r",
+              "      pm.expect(res.status).to.be.a('string');\r",
+              "      pm.expect(res.requestedAmount).to.be.a('number');\r",
+              "      pm.expect(res.resolutionNotes).to.be.a('string');\r",
+              "      pm.expect(res.requestedAtUtc).to.be.a('string');\r",
+              "      pm.expect(res.updatedAtUtc).to.be.a('string');\r",
+              "})"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJ1c2VyLTAwMyIsImVtYWlsIjoibWljaGFlbC5jaGVuQGxld2lzc3RvcmVzLmxvY2FsIiwicm9sZSI6IkN1c3RvbWVyIiwibmJmIjoxNzgwMjk3ODIwLCJleHAiOjE3ODA5MDI2MjAsImlhdCI6MTc4MDI5NzgyMCwiaXNzIjoiTGV3aXNTdG9yZXNNb2NrSXNzdWVyIiwiYXVkIjoiTGV3aXNTdG9yZXNNb2NrQXVkaWVuY2UifQ.l4qCGBaZBqI04_xUZcee5tVmHmVs1b8N2UHXZxGqdz4",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"orderId\": \"ORD-003-20260510\",\r\n  \"reason\": \"Broken Matress\",\r\n  \"requestedAmount\": 23000\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/Returns",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "Returns"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Reject invalid payment method data",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 400\", function () {\r",
+              "    pm.response.to.have.status(400);\r",
+              "    });\r",
+              "\r",
+              "pm.test(\"Response time is less than 2 seconds\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+              "    });"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJ1c2VyLTAwMyIsImVtYWlsIjoibWljaGFlbC5jaGVuQGxld2lzc3RvcmVzLmxvY2FsIiwicm9sZSI6IkN1c3RvbWVyIiwibmJmIjoxNzgwMjk3ODIwLCJleHAiOjE3ODA5MDI2MjAsImlhdCI6MTc4MDI5NzgyMCwiaXNzIjoiTGV3aXNTdG9yZXNNb2NrSXNzdWVyIiwiYXVkIjoiTGV3aXNTdG9yZXNNb2NrQXVkaWVuY2UifQ.l4qCGBaZBqI04_xUZcee5tVmHmVs1b8N2UHXZxGqdz4",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"cardholderName\": \"Micheal Chen\",\r\n  \"cardNumber\": \"3333 3333 3333 3333\",\r\n  \"brand\": \"33\",\r\n  \"expiry\": \"0\",\r\n  \"isDefault\": true\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/PaymentMethods",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "PaymentMethods"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Reject unauthorized access to payment methods",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 401\", function () {\r",
+              "    pm.response.to.have.status(401);\r",
+              "    });\r",
+              "\r",
+              "pm.test(\"Response time is less than 2 seconds\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+              "    });"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/PaymentMethods",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "PaymentMethods"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "E2E For Order Creation",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "    });\r",
+              "\r",
+              "    pm.test(\"Response is under 2 seconds\", function () {\r",
+              "        pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+              "    })\r",
+              "\r",
+              "    pm.test(\"Correct order details are displayed\", function () {\r",
+              "        var jsonData = pm.response.json();\r",
+              "\r",
+              "        const ids = jsonData.map(o => o.id);\r",
+              "        pm.expect(ids).to.include(\"LWS-54732\");\r",
+              "        pm.expect(jsonData.total).to.eql(15999 * 1.15)\r",
+              "\r",
+              "    })"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{supabase_service_role_api_key_10uu}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/Orders",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "Orders"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Auth",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"test.customer@lewisstores.local\",\r\n    \"password\": \"Password123!\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/Auth/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "Auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "E2E for Profile Update",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "    });\r",
+              "\r",
+              "    pm.test(\"Response time is less than 2 seconds\", function () {\r",
+              "        pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+              "        });\r",
+              "\r",
+              "        pm.test(\"Response body contains updated user information\", function () {\r",
+              "            pm.expect(pm.response.json().id).to.eql(\"user-001\");\r",
+              "            pm.expect(pm.response.json().email).to.eql(\"test.customer@lewisstores.local\");\r",
+              "            pm.expect(pm.response.json().role).to.eql(\"Customer\");\r",
+              "            pm.expect(pm.response.json().fullName).to.eql(\"Test Customer\");\r",
+              "            pm.expect(pm.response.json().phone).to.eql(\"762-087\");\r",
+              "            pm.expect(pm.response.json().address).to.eql(\"Cape Town\");\r",
+              "        });"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{auth_secret_1485}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/Auth/me",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "Auth",
+            "me"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "E2E for Return Request",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "    });\r",
+              "\r",
+              "    pm.test(\"Response time is less than 2 seconds\", function () {\r",
+              "        pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+              "        });\r",
+              "\r",
+              "        pm.test(\"Response body contains correct return details\", function () {\r",
+              "            var jsonData = pm.response.json();\r",
+              "           \r",
+              "            pm.expect(jsonData[0].orderId).to.equal(\"ORD-001-20260512\");\r",
+              "            pm.expect(jsonData[0].reason).to.equal(\"Item Broken Upon Arrival\");\r",
+              "            pm.expect(jsonData[0].status).to.equal(\"PendingReview\");\r",
+              "            pm.expect(jsonData[0].requestedAmount).to.equal(32699);\r",
+              "            pm.expect(jsonData[0].approvedAmount).to.equal(null);\r",
+              "        });\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{json_web_token_0183}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/Returns",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "Returns"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "E2E For Negative Order",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "    });\r",
+              "\r",
+              "    pm.test(\"Response time is less than 2 seconds\", function () {\r",
+              "        pm.expect(pm.response.responseTime).to.be.below(200);\r",
+              "        });\r",
+              "\r",
+              "       \r",
+              "         pm.test(\"Order Id is correct\", function () {\r",
+              "    pm.expect(pm.response.text()).to.include(\"LWS-68625\");\r",
+              "});\r",
+              " \r",
+              "pm.test(\"Vertex 4K Monitor quantity is less than 10\", function () {\r",
+              "    var data = pm.response.json();\r",
+              " \r",
+              "    var foundQuantity = null;\r",
+              " \r",
+              "    data.forEach(function (order) {\r",
+              "        if (order.orderItems) {\r",
+              "            order.orderItems.forEach(function (item) {\r",
+              "                if (\r",
+              "                    item.productId === \"vertex-monitor\" ||\r",
+              "                    item.product.title === \"Vertex 4K Monitor\"\r",
+              "                ) {\r",
+              "                    foundQuantity = item.quantity;\r",
+              "                }\r",
+              "            });\r",
+              "        }\r",
+              "    });\r",
+              " \r",
+              "    pm.expect(foundQuantity, \"Vertex 4K Monitor quantity\").to.be.below(10);\r",
+              "})\r",
+              "        \r",
+              "\r",
+              "    \r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{auth_secret_0064}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/Orders",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "Orders"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "E2E For Payment Methods",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "    });\r",
+              "\r",
+              "    pm.test(\"Response time is less than 200ms\", function () {\r",
+              "        pm.expect(pm.response.responseTime).to.be.below(200);\r",
+              "        });\r",
+              "\r",
+              "        pm.test(\"Response body contains expected data\", function () {\r",
+              "            var jsonData = pm.response.json();\r",
+              "\r",
+              "            pm.expect(jsonData).to.have.lengthOf(1);\r",
+              "            pm.expect(jsonData[0]).to.have.property('id', 1);\r",
+              "            pm.expect(jsonData[0]).to.have.property('userId', 'user-001');\r",
+              "            pm.expect(jsonData[0]).to.have.property('cardholderName', 'Test Customer One');\r",
+              "            pm.expect(jsonData[0]).to.have.property('last4', '3456');\r",
+              "        })"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{supabase_service_role_api_key_0eh4}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/PaymentMethods",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "PaymentMethods"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "auth_secret_0064",
+      "secret": true
+    },
+    {
+      "key": "supabase_service_role_api_key_0eh4",
+      "secret": true
+    },
+    {
+      "key": "json_web_token_0183",
+      "secret": true
+    },
+    {
+      "key": "auth_secret_1485",
+      "secret": true
+    },
+    {
+      "key": "supabase_service_role_api_key_10uu",
+      "secret": true
+    }
+  ]
+}
