@@ -8,7 +8,8 @@
     "cy:verify": "cypress verify",
     "cy:run": "cypress run",
     "typecheck": "tsc --noEmit",
-    "api:test": "newman run postman/collections/retail-api-tests.postman_collection.json -e postman/environments/local.postman_environment.json --env-var apiBaseUrl=$env:API_BASE_URL --reporters cli,htmlextra --reporter-htmlextra-export reports/postman/newman-report.html",
+    "api:test:collection1": "newman run postman/collections/Lewis-Capstone.postman_collection.json -e postman/environments/local.postman_environment.json --env-var apiBaseUrl=$env:API_BASE_URL --reporters cli,htmlextra --reporter-htmlextra-export reports/postman/newman-report.html",
+    "api:test:collection2": "newman run postman/collections/LewisCapstone.postman_collection.json -e postman/environments/local.postman_environment.json --env-var apiBaseUrl=$env:API_BASE_URL --reporters cli,htmlextra --reporter-htmlextra-export reports/postman/newman-report.html",
     "test:ui": "npm run typecheck && npm run cy:run",
     "test:api": "npm run api:test",
     "test:all": "npm run typecheck && npm run api:test && npm run cy:run"
