@@ -20,9 +20,10 @@ jobs:
           - 1433:1433
 
     env:
-      CYPRESS_BASE_URL: http://localhost:3000
-      API_BASE_URL: http://localhost:5000
-      ConnectionStrings__DefaultConnection: "Server=localhost,1433;Database=LewisStoresDb;User Id=sa;Password=Your_password123;"
+  CYPRESS_BASE_URL: http://localhost:3000
+  API_BASE_URL: http://localhost:5000
+
+  ConnectionStrings__DefaultConnection: "Server=localhost,1433;Database=LewisStoresDb;User Id=sa;Password=Your_password123;Encrypt=False;TrustServerCertificate=True;"
 
     steps:
       - name: Checkout repository
