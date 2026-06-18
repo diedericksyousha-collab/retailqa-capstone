@@ -41,9 +41,6 @@ jobs:
           test -d reports
           echo "Project structure exists."
 
-      # These are commented out because the app, API, and database are local to your Windows machine.
-      # GitHub-hosted runners cannot access your local localhost services.
-
       - name: Run API tests
         run: npm run api:test
 
