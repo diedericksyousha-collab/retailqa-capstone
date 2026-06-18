@@ -1,14 +1,5 @@
 {
-  "underFiveKm": {
-    "distanceKm": 4,
-    "expectedDeliveryFee": 50
-  },
-  "exactlyFiveKm": {
-    "distanceKm": 5,
-    "expectedDeliveryFee": 100
-  },
-  "overFiveKm": {
-    "distanceKm": 6,
-    "expectedDeliveryFee": 100
-  }
+    "City": "Toronto",
+    "PostalCode": "M5V 2T6"
 }
+

@@ -1,14 +1,5 @@
 {
-  "validUser": {
-    "email": "customer@test.com",
+    "email": "test.customer@lewisstores.local",
     "password": "Password123!"
-  },
-  "invalidUser": {
-    "email": "wrong@test.com",
-    "password": "WrongPassword123!"
-  },
-  "adminUser": {
-    "email": "admin@test.com",
-    "password": "AdminPassword123!"
-  }
 }
+

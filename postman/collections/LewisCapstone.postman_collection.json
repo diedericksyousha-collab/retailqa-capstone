@@ -1,0 +1,1281 @@
+{
+  "info": {
+    "_postman_id": "4ae909bd-5b40-40e4-938e-5130c48405c6",
+    "name": "LewisCapstone",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53135565",
+    "_collection_link": "https://go.postman.co/collection/53135565-4ae909bd-5b40-40e4-938e-5130c48405c6?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "LewisCapstoneProject",
+      "item": [
+        {
+          "name": "Shipment&Delivery",
+          "item": [
+            {
+              "name": "AllDeliveries",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"response is under 2 seconds\", function () {\r",
+                      "        pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+                      "        });\r",
+                      "\r",
+                      "        pm.test(\"Verify delivery fields and data types\", function () {\r",
+                      "\r",
+                      "    const response = pm.response.json();\r",
+                      "\r",
+                      "    response.forEach((delivery) => {\r",
+                      "\r",
+                      "        pm.expect(delivery.id).to.be.a(\"number\");\r",
+                      "        pm.expect(delivery.orderId).to.be.a(\"string\");\r",
+                      "        pm.expect(delivery.userId).to.be.a(\"string\");\r",
+                      "        pm.expect(delivery.status).to.be.a(\"string\");\r",
+                      "        pm.expect(delivery.carrier).to.be.a(\"string\");\r",
+                      "        pm.expect(delivery.trackingNumber).to.be.a(\"string\");\r",
+                      "        pm.expect(delivery.origin).to.be.a(\"string\");\r",
+                      "        pm.expect(delivery.destination).to.be.a(\"string\");\r",
+                      "        pm.expect(delivery.currentLocation).to.be.a(\"string\");\r",
+                      "\r",
+                      "    });\r",
+                      "\r",
+                      "});\r",
+                      "\r",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJhZG1pbi0wMDEiLCJlbWFpbCI6ImFkbWluQGxld2lzc3RvcmVzLmxvY2FsIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNzc5Njg5NDgyLCJleHAiOjE3ODAyOTQyODIsImlhdCI6MTc3OTY4OTQ4MiwiaXNzIjoiTGV3aXNTdG9yZXNNb2NrSXNzdWVyIiwiYXVkIjoiTGV3aXNTdG9yZXNNb2NrQXVkaWVuY2UifQ.RtvVJrrTmxwyYNOax4Pnk68ucrIOWft3r06Ufjsr8cc",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "http://localhost:5000/api/Deliveries",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "Deliveries"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Status&Tracking(ORD-001-20260512)",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"Response time is under 2 seconds\", function () {\r",
+                      "        pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+                      "        });\r",
+                      "\r",
+                      "        pm.test(\"Verify shipment is created and tracking number is displayed\", function () {\r",
+                      "\r",
+                      "    const response = pm.response.json();\r",
+                      "\r",
+                      "    // Verify shipment fields exist\r",
+                      "    pm.expect(response).to.have.property(\"id\");\r",
+                      "    pm.expect(response).to.have.property(\"orderId\");\r",
+                      "    pm.expect(response).to.have.property(\"status\");\r",
+                      "    pm.expect(response).to.have.property(\"trackingNumber\");\r",
+                      "\r",
+                      "    // Verify shipment status\r",
+                      "    pm.expect(response.status).to.eql(\"Processing\");\r",
+                      "\r",
+                      "    // Verify tracking number is not null or empty\r",
+                      "    pm.expect(response.trackingNumber).to.not.be.null;\r",
+                      "    pm.expect(response.trackingNumber).to.not.eql(\"\");\r",
+                      "\r",
+                      "    // Verify tracking number format\r",
+                      "    pm.expect(response.trackingNumber).to.include(\"LL-\");\r",
+                      "\r",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJhZG1pbi0wMDEiLCJlbWFpbCI6ImFkbWluQGxld2lzc3RvcmVzLmxvY2FsIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNzc5Njg5NDgyLCJleHAiOjE3ODAyOTQyODIsImlhdCI6MTc3OTY4OTQ4MiwiaXNzIjoiTGV3aXNTdG9yZXNNb2NrSXNzdWVyIiwiYXVkIjoiTGV3aXNTdG9yZXNNb2NrQXVkaWVuY2UifQ.RtvVJrrTmxwyYNOax4Pnk68ucrIOWft3r06Ufjsr8cc",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:5000/api/Deliveries/ORD-001-20260512",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "Deliveries",
+                    "ORD-001-20260512"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "CreatedOrder",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 201\", function () {",
+                      "    pm.response.to.have.status(201);",
+                      "    });",
+                      "",
+                      "    pm.test(\"Response time is less than 2 seconds\", function () {",
+                      "        pm.expect(pm.response.responseTime).to.be.below(2000);",
+                      "        });",
+                      "",
+                      "            // Verify shipment status notification displays",
+                      "    pm.test(\"Shipment status is Processing\", function () {",
+                      "        var jsonData = pm.response.json();",
+                      "        pm.expect(jsonData.status).to.eql(\"Processing\");",
+                      "    });"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJ1c2VyLTAwMiIsImVtYWlsIjoic2FyYWguam9obnNvbkBsZXdpc3N0b3Jlcy5sb2NhbCIsInJvbGUiOiJDdXN0b21lciIsIm5iZiI6MTc3OTY5NjA4NywiZXhwIjoxNzgwMzAwODg3LCJpYXQiOjE3Nzk2OTYwODcsImlzcyI6Ikxld2lzU3RvcmVzTW9ja0lzc3VlciIsImF1ZCI6Ikxld2lzU3RvcmVzTW9ja0F1ZGllbmNlIn0.xKpaaPc0JQmBgTOSyq2GPmYyR2asleCgHrVvi4yr7zA",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"total\": 24999.00,\r\n  \"items\": \"Textured ivory upholstery with brushed oak legs\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5000/api/Orders",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "Orders"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "DeliveredShipmentVerification",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"Response time is less than 200ms\", function () {\r",
+                      "        pm.expect(pm.response.responseTime).to.be.below(200);\r",
+                      "        });\r",
+                      "\r",
+                      "        pm.test(\"Delivery status is 'Delivered'\", function () {\r",
+                      "            pm.expect(pm.response.json().status).to.eql(\"Delivered\");\r",
+                      "            });\r",
+                      "\r",
+                      "            pm.test(\"Verify successful delivery completion\", function () {\r",
+                      "\r",
+                      "    const response = pm.response.json();\r",
+                      "\r",
+                      "    pm.expect(response.status).to.eql(\"Delivered\");\r",
+                      "    pm.expect(response.currentLocation).to.eql(\"Delivered to recipient\");\r",
+                      "    pm.expect(response.deliveredAtUtc).to.not.be.null;\r",
+                      "\r",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJhZG1pbi0wMDEiLCJlbWFpbCI6ImFkbWluQGxld2lzc3RvcmVzLmxvY2FsIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNzc5Njg5NDgyLCJleHAiOjE3ODAyOTQyODIsImlhdCI6MTc3OTY4OTQ4MiwiaXNzIjoiTGV3aXNTdG9yZXNNb2NrSXNzdWVyIiwiYXVkIjoiTGV3aXNTdG9yZXNNb2NrQXVkaWVuY2UifQ.RtvVJrrTmxwyYNOax4Pnk68ucrIOWft3r06Ufjsr8cc",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:5000/api/Deliveries/ORD-003-20260510",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "Deliveries",
+                    "ORD-003-20260510"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "IncorrectTotalVerification",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 201\", function () {\r",
+                      "    pm.response.to.have.status(201);\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"Response time is under 2 seconds\", function () {\r",
+                      "        pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+                      "        });\r",
+                      "\r",
+                      "        pm.test(\"Verify ordered item is Luca Modular Sofa\", function () {\r",
+                      "\r",
+                      "    const response = pm.response.json();\r",
+                      "\r",
+                      "    pm.expect(response.items).to.eql(\"Luca Modular Sofa\");\r",
+                      "\r",
+                      "});\r",
+                      "\r",
+                      "        pm.test(\"Verify order total is 24999.00\", function () {\r",
+                      "\r",
+                      "    const response = pm.response.json();\r",
+                      "\r",
+                      "    pm.expect(response.total).to.eql(24999.00);\r",
+                      "\r",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJ1c2VyLTAwMiIsImVtYWlsIjoic2FyYWguam9obnNvbkBsZXdpc3N0b3Jlcy5sb2NhbCIsInJvbGUiOiJDdXN0b21lciIsIm5iZiI6MTc3OTY5NjA4NywiZXhwIjoxNzgwMzAwODg3LCJpYXQiOjE3Nzk2OTYwODcsImlzcyI6Ikxld2lzU3RvcmVzTW9ja0lzc3VlciIsImF1ZCI6Ikxld2lzU3RvcmVzTW9ja0F1ZGllbmNlIn0.xKpaaPc0JQmBgTOSyq2GPmYyR2asleCgHrVvi4yr7zA",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"total\": 30000.00,\r\n  \"items\": \"Luca Modular Sofa\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5000/api/Orders",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "Orders"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "IncorrectOrderID",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 404\", function () {\r",
+                      "    pm.response.to.have.status(404);\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"Response is under 2 seconds\", function () {\r",
+                      "    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"Response body contains 'Delivery not found.'\", function () {\r",
+                      "        pm.expect(pm.response.text()).to.include('Delivery not found.');\r",
+                      "        });\r",
+                      "\r",
+                      "        "
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJhZG1pbi0wMDEiLCJlbWFpbCI6ImFkbWluQGxld2lzc3RvcmVzLmxvY2FsIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNzc5Njg5NDgyLCJleHAiOjE3ODAyOTQyODIsImlhdCI6MTc3OTY4OTQ4MiwiaXNzIjoiTGV3aXNTdG9yZXNNb2NrSXNzdWVyIiwiYXVkIjoiTGV3aXNTdG9yZXNNb2NrQXVkaWVuY2UifQ.RtvVJrrTmxwyYNOax4Pnk68ucrIOWft3r06Ufjsr8cc",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:5000/api/Deliveries/ORD-015-20260510",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "Deliveries",
+                    "ORD-015-20260510"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "NonAuthOrderCreation",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 401\", function () {\r",
+                      "    pm.response.to.have.status(401);\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"Response time is less than 2 seconds\", function () {\r",
+                      "        pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+                      "        });\r",
+                      "\r",
+                      "        pm.test(\"Correct error message shows up\", function () {\r",
+                      "            pm.expect(pm.response.text()).to.include(\"Unauthorized\");\r",
+                      "            });"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"total\": 19999.00,\r\n  \"items\": \"Ergonomic Standing Desk\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5000/api/Orders",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "Orders"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Returns&Refund",
+          "item": [
+            {
+              "name": "AllReturns",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"Response time is less than 2 seconds\", function () {\r",
+                      "        pm.expect(pm.response.responseTime).to.be.below(200);\r",
+                      "        });\r",
+                      "\r",
+                      "        pm.test(\"Response body is not empty\", function () {\r",
+                      "            pm.expect(pm.response.json()).to.not.be.empty;\r",
+                      "            });"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJ1c2VyLTAwMyIsImVtYWlsIjoibWljaGFlbC5jaGVuQGxld2lzc3RvcmVzLmxvY2FsIiwicm9sZSI6IkN1c3RvbWVyIiwibmJmIjoxNzgwNDg5MjM3LCJleHAiOjE3ODEwOTQwMzcsImlhdCI6MTc4MDQ4OTIzNywiaXNzIjoiTGV3aXNTdG9yZXNNb2NrSXNzdWVyIiwiYXVkIjoiTGV3aXNTdG9yZXNNb2NrQXVkaWVuY2UifQ.WD5vDNFMpLPmE8uG6OXPKDUR2DsH-EGJvIZDbPn93BY",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5000/api/Returns",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "Returns"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "ReturnCreation",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 201\", function () {\r",
+                      "    pm.response.to.have.status(201);\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"Response time is under 2 seconds\", function () {\r",
+                      "        pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+                      "        });\r",
+                      "\r",
+                      "        pm.test(\"Response body contains correct details\", function () {\r",
+                      "            pm.expect(pm.response.json().orderId).to.equal(\"ORD-003-20260510\");\r",
+                      "            pm.expect(pm.response.json().reason).to.equal(\"Item defective\");\r",
+                      "            pm.expect(pm.response.json().status).to.equal(\"PendingReview\");\r",
+                      "            pm.expect(pm.response.json().requestedAmount).to.equal(23000);\r",
+                      "            pm.expect(pm.response.json().approvedAmount).to.equal(null)\r",
+                      "        });"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJ1c2VyLTAwMyIsImVtYWlsIjoibWljaGFlbC5jaGVuQGxld2lzc3RvcmVzLmxvY2FsIiwicm9sZSI6IkN1c3RvbWVyIiwibmJmIjoxNzgwMzg1ODQxLCJleHAiOjE3ODA5OTA2NDEsImlhdCI6MTc4MDM4NTg0MSwiaXNzIjoiTGV3aXNTdG9yZXNNb2NrSXNzdWVyIiwiYXVkIjoiTGV3aXNTdG9yZXNNb2NrQXVkaWVuY2UifQ.jWbVceC0D9SzCYZ1E3FshRlMx8AmtHSneFJeroUSXqM",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"orderId\": \"ORD-003-20260510\",\r\n  \"reason\": \"Item defective\",\r\n  \"requestedAmount\": 23000.00\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5000/api/Returns",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "Returns"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Status&PriceValidation",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function (){\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "})\r",
+                      "\r",
+                      "pm.test(\"Response is under 2 seconds\", function (){\r",
+                      "    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+                      "})\r",
+                      "\r",
+                      "pm.test(\"Response body returns correct parameters\", function (){\r",
+                      "    pm.expect(pm.response.json().id).to.eql(54);\r",
+                      "    pm.expect(pm.response.json().status).to.eql(\"ApprovedPendingPayout\");\r",
+                      "    pm.expect(pm.response.json().orderId).to.eql(\"ORD-004-20260509\");\r",
+                      "    pm.expect(pm.response.json().approvedAmount).to.eql(\"19999.00\");\r",
+                      "    pm.expect(pm.response.json().resolutionNotes).to.eql(\"Awaiting customer response\");\r",
+                      "    pm.expect(pm.response.json().updatedAtUtc).to.not.eql(null);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJhZG1pbi0wMDEiLCJlbWFpbCI6ImFkbWluQGxld2lzc3RvcmVzLmxvY2FsIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNzgwMzg3NTI4LCJleHAiOjE3ODA5OTIzMjgsImlhdCI6MTc4MDM4NzUyOCwiaXNzIjoiTGV3aXNTdG9yZXNNb2NrSXNzdWVyIiwiYXVkIjoiTGV3aXNTdG9yZXNNb2NrQXVkaWVuY2UifQ.cxtVmZ0c1-gAI5Ls-jE9e5n6FLOAdpc-Z1ne_MbWh8E",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"status\": \"Approved\",\r\n  \"approvedAmount\": 19999.00,\r\n  \"resolutionNotes\": \"Awaiting customer response\"\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5000/api/Returns/54/status",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "Returns",
+                    "54",
+                    "status"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "InventoryRestoration",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"Response time is less than 2 seconds\", function () {\r",
+                      "        pm.expect(pm.response.responseTime).to.be.below(200);\r",
+                      "        });\r",
+                      "\r",
+                      "\r",
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"CloudRest mattress exists and stock quantity is 5\", function () {\r",
+                      "    const response = pm.response.json();\r",
+                      "\r",
+                      "    function findCloudRestMattress(data) {\r",
+                      "        if (Array.isArray(data)) {\r",
+                      "            return data.find(item =>\r",
+                      "                item &&\r",
+                      "                item.id === \"cloudrest-mattress\" &&\r",
+                      "                item.stockQuantity === 5\r",
+                      "            );\r",
+                      "        }\r",
+                      "\r",
+                      "        if (typeof data === \"object\" && data !== null) {\r",
+                      "            if (\r",
+                      "                data.id === \"cloudrest-mattress\" &&\r",
+                      "                data.stockQuantity === 5\r",
+                      "            ) {\r",
+                      "                return data;\r",
+                      "            }\r",
+                      "\r",
+                      "            for (const key in data) {\r",
+                      "                const found = findCloudRestMattress(data[key]);\r",
+                      "                if (found) {\r",
+                      "                    return found;\r",
+                      "                }\r",
+                      "            }\r",
+                      "        }\r",
+                      "\r",
+                      "        return null;\r",
+                      "    }\r",
+                      "\r",
+                      "    const product = findCloudRestMattress(response);\r",
+                      "\r",
+                      "    pm.expect(product, \"CloudRest mattress with stock quantity 5 was not found\").to.not.be.null;\r",
+                      "    pm.expect(product.id).to.eql(\"cloudrest-mattress\");\r",
+                      "    pm.expect(product.stockQuantity).to.eql(5);\r",
+                      "});\r",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJhZG1pbi0wMDEiLCJlbWFpbCI6ImFkbWluQGxld2lzc3RvcmVzLmxvY2FsIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNzgwMzg3NTI4LCJleHAiOjE3ODA5OTIzMjgsImlhdCI6MTc4MDM4NzUyOCwiaXNzIjoiTGV3aXNTdG9yZXNNb2NrSXNzdWVyIiwiYXVkIjoiTGV3aXNTdG9yZXNNb2NrQXVkaWVuY2UifQ.cxtVmZ0c1-gAI5Ls-jE9e5n6FLOAdpc-Z1ne_MbWh8E",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "http://localhost:5000/api/Products",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "Products"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update/wCustomerAuthorization",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 401\", function () {\r",
+                      "    pm.response.to.have.status(401);\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"Response time is less than 2 seconds\", function () {\r",
+                      "        pm.expect(pm.response.responseTime).to.be.below(200);\r",
+                      "        });"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJ1c2VyLTAwMyIsImVtYWlsIjoibWljaGFlbC5jaGVuQGxld2lzc3RvcmVzLmxvY2FsIiwicm9sZSI6IkN1c3RvbWVyIiwibmJmIjoxNzgwNDAyMzEwLCJleHAiOjE3ODEwMDcxMTAsImlhdCI6MTc4MDQwMjMxMCwiaXNzIjoiTGV3aXNTdG9yZXNNb2NrSXNzdWVyIiwiYXVkIjoiTGV3aXNTdG9yZXNNb2NrQXVkaWVuY2UifQ.lNR7ABff3ZLPXjMeEtENgv_TPkPzcDRxovgS5aXo_v0",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"status\": \"Approved\",\r\n  \"approvedAmount\": 23000.00,\r\n  \"resolutionNotes\": \"Customer approval\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5000/api/Returns/56/status",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "Returns",
+                    "56",
+                    "status"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "ReturnCreation/wInvalidRequestAmount",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Response status code is 400\", function () {\r",
+                      "    pm.response.to.have.status(400);\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"Response time is under 2 seconds\", function () {\r",
+                      "        pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+                      "        });\r",
+                      "\r",
+                      "        pm.test(\"Error message is returned\", function () {\r",
+                      "            pm.expect(pm.response.json().message).to.eql(\"Order not found for current user.\");\r",
+                      "            });"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJhZG1pbi0wMDEiLCJlbWFpbCI6ImFkbWluQGxld2lzc3RvcmVzLmxvY2FsIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNzgwNDAzMDYwLCJleHAiOjE3ODEwMDc4NjAsImlhdCI6MTc4MDQwMzA2MCwiaXNzIjoiTGV3aXNTdG9yZXNNb2NrSXNzdWVyIiwiYXVkIjoiTGV3aXNTdG9yZXNNb2NrQXVkaWVuY2UifQ.gXzrFFoHidsWWGwl4TzM4VKBhoTrzKsBKidy8j_jubY",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"orderId\": \"ORD-003-20260510\",\r\n  \"reason\": \"Return test 2\",\r\n  \"requestedAmount\": 100000.00\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5000/api/Returns",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "Returns"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Return/wInvalidOrderID",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Response status code is 400\", function () {\r",
+                      "    pm.response.to.have.status(400);\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"Response time is under 2 seconds\", function () {\r",
+                      "        pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+                      "        });\r",
+                      "\r",
+                      "        pm.test(\"Error message is returned\", function () {\r",
+                      "            pm.expect(pm.response.json().message).to.eql(\"Order not found for current user.\");\r",
+                      "            });"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJhZG1pbi0wMDEiLCJlbWFpbCI6ImFkbWluQGxld2lzc3RvcmVzLmxvY2FsIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNzgwNDAzMzk2LCJleHAiOjE3ODEwMDgxOTYsImlhdCI6MTc4MDQwMzM5NiwiaXNzIjoiTGV3aXNTdG9yZXNNb2NrSXNzdWVyIiwiYXVkIjoiTGV3aXNTdG9yZXNNb2NrQXVkaWVuY2UifQ.kqzOam-VK0CYMVJljXn-CX54_1m0imevOd60p8VmVAo",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"orderId\": \"ORD-003-202612345\",\r\n  \"reason\": \"Item defective\",\r\n  \"requestedAmount\": 23000.00\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5000/api/Returns",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "Returns"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Dashboard&Accounts",
+          "item": [
+            {
+              "name": "OrderHistory",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"Response time is less than 2 seconds\", function () {\r",
+                      "        pm.expect(pm.response.responseTime).to.be.below(200);\r",
+                      "        });\r",
+                      "\r",
+                      "        pm.test(\"Response body contains the correct order details\", function () {\r",
+                      "            const jsonData = pm.response.json();\r",
+                      "            pm.expect(jsonData).to.have.lengthOf(1);\r",
+                      "            pm.expect(jsonData[0].id).to.equal(\"LWS-99012\");\r",
+                      "            pm.expect(jsonData[0].date).to.equal(\"02 Jun 2026\");\r",
+                      "            pm.expect(jsonData[0].status).to.equal(\"Processing\");\r",
+                      "            pm.expect(jsonData[0].total).to.equal(45999.11);\r",
+                      "            pm.expect(jsonData[0].userId).to.equal(\"admin-001\");\r",
+                      "            pm.expect(jsonData[0].items).to.equal(\"CloudRest Memory Foam Mattress\");\r",
+                      "        });\r",
+                      "\r",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJhZG1pbi0wMDEiLCJlbWFpbCI6ImFkbWluQGxld2lzc3RvcmVzLmxvY2FsIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNzgwNjUzMjIyLCJleHAiOjE3ODEyNTgwMjIsImlhdCI6MTc4MDY1MzIyMiwiaXNzIjoiTGV3aXNTdG9yZXNNb2NrSXNzdWVyIiwiYXVkIjoiTGV3aXNTdG9yZXNNb2NrQXVkaWVuY2UifQ.rIl-16S9NuV1PfucNIbjCBlCNMlLkpdLf7AR7WM_bcM",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "http://localhost:5000/api/Orders",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "Orders"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "ProfileUpdate",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"Response time is less than 2 seconds\", function () {\r",
+                      "        pm.expect(pm.response.responseTime).to.be.below(200);\r",
+                      "        });\r",
+                      "\r",
+                      "        pm.test(\"Response body contains user information\", function () {\r",
+                      "            pm.expect(pm.response.json().id).to.eql(\"user-003\");\r",
+                      "            pm.expect(pm.response.json().email).to.eql(\"michael.chen@lewisstores.local\");\r",
+                      "            pm.expect(pm.response.json().role).to.eql(\"Customer\");\r",
+                      "            pm.expect(pm.response.json().fullName).to.eql(\"Seth Hunter\");\r",
+                      "            pm.expect(pm.response.json().phone).to.eql(\"+27 84 938 8803\");\r",
+                      "            pm.expect(pm.response.json().address).to.eql(\"39 Belmount view\");\r",
+                      "            pm.expect(pm.response.json().id).to.eql(\"user-003\");\r",
+                      "        });\r",
+                      "\r",
+                      "            "
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJ1c2VyLTAwMyIsImVtYWlsIjoibWljaGFlbC5jaGVuQGxld2lzc3RvcmVzLmxvY2FsIiwicm9sZSI6IkN1c3RvbWVyIiwibmJmIjoxNzgwNjUzNjE5LCJleHAiOjE3ODEyNTg0MTksImlhdCI6MTc4MDY1MzYxOSwiaXNzIjoiTGV3aXNTdG9yZXNNb2NrSXNzdWVyIiwiYXVkIjoiTGV3aXNTdG9yZXNNb2NrQXVkaWVuY2UifQ.LeSyWAFGlSOpfKR1o9s03ziza82V2TA5vaDgZFNcIjo",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"fullName\": \"Seth Hunter\",\r\n  \"phone\": \"+27 84 938 8803\",\r\n  \"address\": \"39 Belmount view\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5000/api/Auth/me",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "Auth",
+                    "me"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "UnauthorizedOrderHistory",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 401\", function () {\r",
+                      "    pm.response.to.have.status(401);\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"Response time is under 2 seconds\", function () {\r",
+                      "        pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+                      "        });"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "http://localhost:5000/api/Orders",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "Orders"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "InvalidProfileUpdate",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 400\", function () {\r",
+                      "    pm.response.to.have.status(400);\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"Response time is less than 2 seconds\", function () {\r",
+                      "        pm.expect(pm.response.responseTime).to.be.below(200);\r",
+                      "        });\r",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJhZG1pbi0wMDEiLCJlbWFpbCI6ImFkbWluQGxld2lzc3RvcmVzLmxvY2FsIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNzgwNjU5NjQzLCJleHAiOjE3ODEyNjQ0NDMsImlhdCI6MTc4MDY1OTY0MywiaXNzIjoiTGV3aXNTdG9yZXNNb2NrSXNzdWVyIiwiYXVkIjoiTGV3aXNTdG9yZXNNb2NrQXVkaWVuY2UifQ.9OfyWj7QxLEZjaxbifGsvIgaktp12bn3hvvCVdfON4U",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"fullName\": \"S3t4 Hun1er\",\r\n  \"phone\": \"+27 8g he8 8803\",\r\n  \"address\": \"39 Belmount view\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5000/api/Auth/me",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "Auth",
+                    "me"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Authorization",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"admin@lewisstores.local\",\r\n    \"password\": \"Password123!\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/Auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "Auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

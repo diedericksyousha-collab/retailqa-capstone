@@ -1,18 +1,5 @@
 {
-  "validCardPayment": {
-    "cardNumber": "4111111111111111",
-    "expiryDate": "12/30",
-    "cvv": "123",
-    "expectedStatus": "Paid"
-  },
-  "invalidCardPayment": {
-    "cardNumber": "4000000000000002",
-    "expiryDate": "12/30",
-    "cvv": "123",
-    "expectedStatus": "Declined"
-  },
-  "cashPayment": {
-    "method": "Cash",
-    "expectedStatus": "Pending"
-  }
+    "CardNumber": "4111 1111 1111 1111",
+    "ExpiryDate": "12/25",
+    "CVV": "123"
 }
