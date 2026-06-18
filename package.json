@@ -10,7 +10,7 @@
     "typecheck": "tsc --noEmit",
     "api:test:collection1": "newman run postman/collections/Lewis-Capstone.postman_collection.json -e postman/environments/local.postman_environment.json --env-var apiBaseUrl=$env:API_BASE_URL --reporters cli,htmlextra --reporter-htmlextra-export reports/postman/newman-report.html",
     "api:test:collection2": "newman run postman/collections/LewisCapstone.postman_collection.json -e postman/environments/local.postman_environment.json --env-var apiBaseUrl=$env:API_BASE_URL --reporters cli,htmlextra --reporter-htmlextra-export reports/postman/newman-report.html",
-    "start:api": "dotnet run --project app/Lewis-Web/Lewis-Stores/LewisStores.Api",
+    "start:api": "dotnet run --retailqa-capstone app/Lewis-Web/Lewis-Stores/LewisStores.Api",
     "ci:test": "start-server-and-test start:api http://localhost:5000 test:all",
     "test:ui": "npm run typecheck && npm run cy:run",
     "test:api": "npm run api:test",
