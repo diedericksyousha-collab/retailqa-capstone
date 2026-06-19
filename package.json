@@ -4,17 +4,24 @@
   "description": "BRD-aligned Retail QE Capstone automation project using Cypress TypeScript, Postman/Newman, SQL validation, and GitHub Actions.",
   "main": "index.js",
   "scripts": {
-    "cy:open": "cypress open",
-    "cy:verify": "cypress verify",
-    "cy:run": "cypress run",
-    "typecheck": "tsc --noEmit",
-    "api:test:collection1": "newman run postman/collections/Lewis-Capstone.postman_collection.json -e postman/environments/local.postman_environment.json --env-var apiBaseUrl=$env:API_BASE_URL --reporters cli,htmlextra --reporter-htmlextra-export reports/postman/newman-report.html",
-    "api:test:collection2": "newman run postman/collections/LewisCapstone.postman_collection.json -e postman/environments/local.postman_environment.json --env-var apiBaseUrl=$env:API_BASE_URL --reporters cli,htmlextra --reporter-htmlextra-export reports/postman/newman-report.html",
-    "start:api": "cd app/Lewis-Web/Lewis-Stores/LewisStores.Api && dotnet run",
-    "ci:test": "start-server-and-test start:api http://localhost:5000/swagger test:all",
-    "test:api": "npm run api:test",
-    "test:all": "npm run typecheck && npm run api:test && npm run cy:run"
-  },
+  "cy:open": "cypress open",
+  "cy:verify": "cypress verify",
+  "cy:run": "cypress run",
+
+  "typecheck": "tsc --noEmit",
+
+  "api:test:collection1": "newman run postman/collections/Lewis-Capstone.postman_collection.json -e postman/environments/local.postman_environment.json --env-var apiBaseUrl=$API_BASE_URL --reporters cli,htmlextra --reporter-htmlextra-export reports/postman/newman-report1.html",
+
+  "api:test:collection2": "newman run postman/collections/LewisCapstone.postman_collection.json -e postman/environments/local.postman_environment.json --env-var apiBaseUrl=$API_BASE_URL --reporters cli,htmlextra --reporter-htmlextra-export reports/postman/newman-report2.html",
+
+  "api:test": "npm run api:test:collection1 && npm run api:test:collection2",
+
+  "start:api": "cd app/Lewis-Web/Lewis-Stores/LewisStores.Api && dotnet run",
+
+  "test:all": "npm run typecheck && npm run api:test && npm run cy:run",
+
+  "ci:test": "start-server-and-test start:api http://localhost:5000/docs/index.html test:all"
+},
   "keywords": [
     "qa",
     "cypress",

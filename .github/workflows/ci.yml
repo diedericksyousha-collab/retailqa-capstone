@@ -36,6 +36,60 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Install sqlcmd
+        run: |
+          sudo apt-get update
+          sudo ACCEPT_EULA=Y apt-get install -y mssql-tools18 unixodbc-dev
+
+      - name: Wait for SQL Server
+        run: |
+          until /opt/mssql-tools18/bin/sqlcmd \
+            -S localhost,1433 \
+            -U sa \
+            -P "Your_password123" \
+            -C \
+            -Q "SELECT 1"
+          do
+            echo "Waiting for SQL Server..."
+            sleep 5
+          done
+
+      - name: Reset Database
+        run: |
+          /opt/mssql-tools18/bin/sqlcmd \
+            -S localhost,1433 \
+            -U sa \
+            -P "Your_password123" \
+            -C \
+            -i sql/setup/00-reset-database.sql
+
+      - name: Create Database
+        run: |
+          /opt/mssql-tools18/bin/sqlcmd \
+            -S localhost,1433 \
+            -U sa \
+            -P "Your_password123" \
+            -C \
+            -i sql/setup/01-create-database.sql
+
+      - name: Create Schema
+        run: |
+          /opt/mssql-tools18/bin/sqlcmd \
+            -S localhost,1433 \
+            -U sa \
+            -P "Your_password123" \
+            -C \
+            -i sql/setup/02-create-schema.sql
+
+      - name: Seed Test Data
+        run: |
+          /opt/mssql-tools18/bin/sqlcmd \
+            -S localhost,1433 \
+            -U sa \
+            -P "Your_password123" \
+            -C \
+            -i sql/setup/03-seed-test-data.sql
+
       - name: Run Backend + Tests
         run: npm run ci:test
 
