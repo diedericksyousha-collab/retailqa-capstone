@@ -5,7 +5,7 @@ describe('template spec', () => {
     cy.wait(5000)
   })
 
-  it('', () => {
+  it('Profile Update Validation', () => {
     cy.contains('.btn', 'Log In').should('be.visible').and('not.be.disabled').click()
     cy.get('[type="Email"]').type('test.customer@lewisstores.local')
     cy.get('[type="Password"]').type('Password123!')
