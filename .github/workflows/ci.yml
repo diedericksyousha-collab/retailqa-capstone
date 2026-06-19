@@ -61,7 +61,7 @@ jobs:
             -U sa \
             -P "Your_password123" \
             -C \
-            -i sql/setup/00-reset-database.sql
+            -i app/Lewis-Web/Lewis-Stores/sql/setup/00-reset-database.sql
 
       - name: Create Database
         run: |
@@ -70,7 +70,7 @@ jobs:
             -U sa \
             -P "Your_password123" \
             -C \
-            -i sql/setup/01-create-database.sql
+            -i app/Lewis-Web/Lewis-Stores/sql/setup/01-create-database.sql
 
       - name: Create Schema
         run: |
@@ -79,7 +79,7 @@ jobs:
             -U sa \
             -P "Your_password123" \
             -C \
-            -i sql/setup/02-create-schema.sql
+            -i app/Lewis-Web/Lewis-Stores/sql/setup/02-create-schema.sql
 
       - name: Seed Test Data
         run: |
@@ -88,7 +88,7 @@ jobs:
             -U sa \
             -P "Your_password123" \
             -C \
-            -i sql/setup/03-seed-test-data.sql
+            -i app/Lewis-Web/Lewis-Stores/sql/setup/03-seed-test-data.sql
 
       - name: Run Backend + Tests
         run: npm run ci:test
